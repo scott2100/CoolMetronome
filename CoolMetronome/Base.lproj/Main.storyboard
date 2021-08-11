@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +674,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="CoolMetronome" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -683,7 +684,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Cool Metronome" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -703,15 +704,64 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="CoolMetronome" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="yR4-KN-AQ3">
+                                <rect key="frame" x="216" y="20" width="48" height="48"/>
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="outline_play_arrow_white_48pt" imagePosition="overlaps" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="aGM-ES-dLp">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="playButton:" target="XfG-lQ-9wD" id="en2-6r-aHH"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XLO-33-h2I">
+                                <rect key="frame" x="189" y="141" width="102" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="pY8-hy-cjW"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="blS-W1-Bta">
+                                    <font key="font" metaFont="system" size="40"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mdy-kv-1xN">
+                                <rect key="frame" x="124" y="75" width="232" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="228" id="AXH-EA-YLa"/>
+                                </constraints>
+                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="40" maxValue="300" doubleValue="170" tickMarkPosition="above" sliderType="linear" id="lie-f5-7xC"/>
+                                <connections>
+                                    <action selector="sliderChanged:" target="XfG-lQ-9wD" id="xEt-a1-KJu"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="XLO-33-h2I" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="64" id="3Tz-kI-fO1"/>
+                            <constraint firstItem="yR4-KN-AQ3" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="7Ll-Q6-6Q9"/>
+                            <constraint firstItem="yR4-KN-AQ3" firstAttribute="top" secondItem="mdy-kv-1xN" secondAttribute="bottom" constant="13" id="BxK-Yz-1u8"/>
+                            <constraint firstItem="mdy-kv-1xN" firstAttribute="top" secondItem="XLO-33-h2I" secondAttribute="bottom" constant="40" id="Lbf-Qc-ynZ"/>
+                            <constraint firstItem="XLO-33-h2I" firstAttribute="centerX" secondItem="mdy-kv-1xN" secondAttribute="centerX" id="PTj-ST-lXP"/>
+                            <constraint firstItem="XLO-33-h2I" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="bhI-9J-m8y"/>
+                            <constraint firstItem="yR4-KN-AQ3" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="iPc-hS-zQW"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bpm" destination="XLO-33-h2I" id="af5-Kp-sK6"/>
+                        <outlet property="slider" destination="mdy-kv-1xN" id="js0-hN-sRj"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="outline_play_arrow_white_48pt" width="48" height="48"/>
+    </resources>
 </document>
